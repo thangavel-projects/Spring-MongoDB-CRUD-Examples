@@ -1,0 +1,9 @@
+apply plugin:'java'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+	compile 'org.mongodb:mongo-java-driver:2.12.3','org.mongodb:bson:3.2.2'
+}
