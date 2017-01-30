@@ -15,12 +15,17 @@ public class SampleCRUDOps {
     
 	public static void main(String[] args) throws UnknownHostException {
 		MongoDatabase mongoDbConnection = MongoDbConnection.getMongoDbConnection();
-		MongoCollection<Document> collection = mongoDbConnection.getCollection("movies");
+		MongoCollection<Document> collection = mongoDbConnection.getCollection("moviesnew1");
 		SampleCRUDOps sampleCRUDOps = new SampleCRUDOps();
+		
 		sampleCRUDOps.findAll(collection);
 		sampleCRUDOps.insert(collection);
 		sampleCRUDOps.update(collection);
 		sampleCRUDOps.delete(collection);
+		
+		// Insert Multiple Records
+		CRUDHelper.insertMany(collection);
+		
 	}
 
 	private void findAll(MongoCollection<Document> collection) {
