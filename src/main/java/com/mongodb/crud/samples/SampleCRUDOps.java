@@ -1,35 +1,25 @@
 package com.mongodb.crud.samples;
 
 import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.DBObject;
-import com.mongodb.MongoClient;
-import com.mongodb.util.JSON;
+import org.bson.Document;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 
 public class SampleCRUDOps {
     
 	public static void main(String[] args) throws UnknownHostException {
-		InsertData();
+		SampleCRUDOps sampleCRUDOps = new SampleCRUDOps();
+		sampleCRUDOps.findAll();
 	}
-	
-	private static void InsertData() throws UnknownHostException{
-		
-		MongoClient client = new MongoClient();
-		DB db = client.getDB("Thangavel");
-		DBCollection collection = db.getCollection("CRUDSamples");
-		collection.drop();
-		
-		DBObject dbObject = (DBObject) JSON.parse("{'Name':'Thangavel', 'Age':30, 'Address':'India'}");
-		DBObject OneDBObject = (DBObject) JSON.parse("{'Name':'Loganathan', 'Age':23, 'Address':'US'}");
-		List<DBObject> dbObjects = new ArrayList<>();
-		dbObjects.add(dbObject);
-		dbObjects.add(OneDBObject);
-		
-		collection.insert(dbObjects);
-		
+
+	private void findAll() {
+		MongoDatabase mongoDbConnection = MongoDbConnection.getMongoDbConnection();
+		MongoCollection<Document> collection = mongoDbConnection.getCollection("movies");
+		FindIterable<Document> cursor = collection.find();
+		for (Document document : cursor) {
+			String jsonObject = document.toJson();
+			System.out.println(jsonObject);
+		}
 	}
 }
