@@ -6,7 +6,6 @@ import java.util.List;
 import org.bson.Document;
 
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.model.Indexes;
 
 public class CRUDHelper {
 
